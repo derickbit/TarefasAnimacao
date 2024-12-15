@@ -1,0 +1,26 @@
+.denuncia_container {
+  width: 450px;
+  margin: 0 auto;
+  padding: 3em;
+}
+
+.denuncia_container h1 {
+  margin-bottom: 0.5em;
+}
+
+.denuncia_container p {
+  color: #7b7b7b;
+}
+
+.form {
+  width: 100%;
+  margin: 2em 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1em; /* Adiciona espaçamento vertical entre os elementos do formulário */
+}
+
+.form button {
+  margin-top: 0.5em; /* Espaçamento extra opcional */
+}
