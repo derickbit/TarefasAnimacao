@@ -1,0 +1,81 @@
+.bodyEditarPerfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #222;
+  color: #fff;
+}
+
+.tituloEditarPerfil {
+  margin-top: 1em;
+  font-size: 2em;
+  text-align: center;
+  color: #fff;
+}
+
+.mainEditarPerfil {
+  width: 90%;
+  max-width: 400px;
+  margin: 2em 0;
+  padding: 2em;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.sectionEditarPerfil {
+  display: flex;
+  flex-direction: column;
+}
+
+.formEditarPerfil,
+.formExcluirConta {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+label {
+  font-size: 1em;
+  color: #fff;
+}
+
+input {
+  padding: 0.5em;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+}
+
+input:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.btnAlterar,
+.btnExcluirConta {
+  padding: 0.7em;
+  font-size: 1em;
+  color: #fff;
+  background-color: #444;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnAlterar:hover {
+  background-color: #555;
+}
+
+.btnExcluirConta:hover {
+  background-color: #b71c1c;
+}

@@ -1,80 +1,32 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
+import { useDenunciasContext } from "../../contexts/DenunciasProvider";
 import Input from "../../Components/Form/Input";
 import Select from "../../Components/Form/Select";
 import SubmitButton from "../../Components/Form/SubmitButton";
 import styles from "./Denuncias.module.css";
 
 const DenunciarJogador = () => {
-  const [pessoas, setPessoas] = useState([]);
-  const [denuncias, setDenuncias] = useState([]);
+  const { jogadores, denuncias, registrarDenuncia, excluirDenuncia } =
+    useDenunciasContext();
   const [descricao, setDescricao] = useState("");
   const [coddenunciado, setCodDenunciado] = useState("");
   const [imagem, setImagem] = useState(null);
-  const [mensagem, setMensagem] = useState("");
-
-  // Referência para o input de arquivo
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const pessoasResponse = await fetch("/api/pessoas");
-        const pessoasData = await pessoasResponse.json();
-        setPessoas(pessoasData);
-
-        const denunciasResponse = await fetch("/api/denuncias");
-        const denunciasData = await denunciasResponse.json();
-        setDenuncias(denunciasData);
-      } catch (error) {
-        console.error("Erro ao carregar dados:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("coddenunciado", coddenunciado);
+    formData.append("denunciado_id", coddenunciado);
     formData.append("descricao", descricao);
     if (imagem) {
       formData.append("imagem", imagem);
     }
 
-    try {
-      const response = await fetch("/api/denuncias", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
-      setMensagem(result.message);
-      if (result.success) {
-        setDenuncias((prev) => [...prev, result.denuncia]);
-      }
-    } catch (error) {
-      console.error("Erro ao registrar denúncia:", error);
-    }
-  };
-
-  const handleExcluir = async (coddenuncia) => {
-    if (window.confirm("Você tem certeza que deseja excluir esta denúncia?")) {
-      try {
-        const response = await fetch(`/api/denuncias/${coddenuncia}`, {
-          method: "DELETE",
-        });
-        const result = await response.json();
-        if (result.success) {
-          setDenuncias((prev) =>
-            prev.filter((denuncia) => denuncia.coddenuncia !== coddenuncia)
-          );
-        }
-        setMensagem(result.message);
-      } catch (error) {
-        console.error("Erro ao excluir denúncia:", error);
-      }
-    }
+    await registrarDenuncia(formData);
+    setDescricao("");
+    setCodDenunciado("");
+    setImagem(null);
   };
 
   const handleFileChange = (e) => {
@@ -89,9 +41,9 @@ const DenunciarJogador = () => {
         <Select
           text="Jogador a ser denunciado"
           name="coddenunciado"
-          options={pessoas.map((pessoa) => ({
-            id: pessoa.codpessoa,
-            name: pessoa.nome,
+          options={jogadores.map((jogador) => ({
+            id: jogador.id,
+            name: jogador.name,
           }))}
           handleOnChange={(e) => setCodDenunciado(e.target.value)}
           value={coddenunciado}
@@ -106,7 +58,6 @@ const DenunciarJogador = () => {
           value={descricao}
         />
 
-        {/* Input de arquivo oculto */}
         <input
           type="file"
           ref={fileInputRef}
@@ -114,19 +65,16 @@ const DenunciarJogador = () => {
           style={{ display: "none" }}
         />
 
-        {/* Botão personalizado para abrir o seletor de arquivos */}
         <SubmitButton
           text={imagem ? "Arquivo Selecionado" : "Anexar Imagem (opcional)"}
           onClick={(e) => {
             e.preventDefault();
-            fileInputRef.current.click(); // Simula clique no input
+            fileInputRef.current.click();
           }}
         />
 
         <SubmitButton text="Registrar Denúncia" />
       </form>
-
-      {mensagem && <p className={styles.message}>{mensagem}</p>}
 
       <section className={styles.denunciasSection}>
         <h3>Minhas Denúncias</h3>
@@ -146,7 +94,7 @@ const DenunciarJogador = () => {
               {denuncias.map((denuncia) => (
                 <tr key={denuncia.coddenuncia}>
                   <td>{denuncia.coddenuncia}</td>
-                  <td>{denuncia.nome_denunciado}</td>
+                  <td>{denuncia.denunciado.name}</td>
                   <td>{denuncia.descricao}</td>
                   <td>
                     {denuncia.imagem ? (
@@ -163,7 +111,7 @@ const DenunciarJogador = () => {
                   <td>
                     <button
                       className={styles.deleteButton}
-                      onClick={() => handleExcluir(denuncia.coddenuncia)}
+                      onClick={() => excluirDenuncia(denuncia.coddenuncia)}
                     >
                       Excluir
                     </button>

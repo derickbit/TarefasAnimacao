@@ -6,36 +6,27 @@ const RankingJogadores = () => {
   const [ranking, setRanking] = useState([]);
 
   useEffect(() => {
-    const fetchRanking = async () => {
-      try {
-        const response = await fetch("/api/ranking");
-        const data = await response.json();
-        setRanking(data);
-      } catch (error) {
-        console.error("Erro ao carregar o ranking:", error);
-      }
-    };
-
-    fetchRanking();
+    fetch("http://127.0.0.1:8000/api/partidas/ranking")
+      .then((response) => response.json())
+      .then((data) => setRanking(data))
+      .catch((error) => console.error("Erro ao buscar o ranking:", error));
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Ranking de Jogadores</h1>
-      {ranking.length > 0 ? (
-        <ul>
-          {ranking.map((jogador, index) => (
-            <li key={jogador.codpessoa}>
-              <RankingCard
-                name={`${index + 1}º lugar: ${jogador.nome}`}
-                pontuacao={jogador.total_pontuacao}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className={styles.message}>Nenhum jogador no ranking.</p>
-      )}
+    <div className="project_container">
+      <div className="tittle_container">
+        <h1>Ranking</h1>
+      </div>
+      <div className="ranking_list">
+        {ranking.map((user, index) => (
+          <RankingCard
+            key={user.id}
+            name={user.name}
+            pontuacao={user.total_pontuacao}
+            position={index + 1} // Passe a posição aqui
+          />
+        ))}
+      </div>
     </div>
   );
 };
