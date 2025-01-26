@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import axiosClient from "../utils/axios_client";
 
 export const RankingContext = createContext();
 
@@ -9,11 +10,8 @@ export const RankingProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
 
-    fetch("http://127.0.0.1:8000/partidas/ranking", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    axiosClient
+      .get("http://127.0.0.1:8000/api/partidas/ranking")
       .then((response) => response.json())
       .then((data) => {
         setRanking(data);

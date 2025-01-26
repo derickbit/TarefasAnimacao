@@ -17,9 +17,7 @@ export default function DenunciasProvider({ children }) {
 
   const fetchDenuncias = async () => {
     try {
-      const response = await axiosClient.get("/denuncias", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axiosClient.get("/denuncias", {});
       setDenuncias(response.data);
     } catch (error) {
       console.error("Erro ao carregar denúncias:", error);
@@ -39,13 +37,7 @@ export default function DenunciasProvider({ children }) {
 
   const registrarDenuncia = async (formData) => {
     try {
-      const response = await axiosClient.post("/denuncias", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      setDenuncias((prev) => [...prev, response.data.denuncia]);
+      const response = await axiosClient.post("/denuncias", formData, {});
       return response.data;
     } catch (error) {
       console.error("Erro ao registrar denúncia:", error);

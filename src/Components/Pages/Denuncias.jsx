@@ -4,29 +4,50 @@ import Input from "../../Components/Form/Input";
 import Select from "../../Components/Form/Select";
 import SubmitButton from "../../Components/Form/SubmitButton";
 import styles from "./Denuncias.module.css";
+import { useAuthContext } from "../../contexts/AuthProvider";
 
 const DenunciarJogador = () => {
-  const { jogadores, denuncias, registrarDenuncia, excluirDenuncia } =
-    useDenunciasContext();
+  const {
+    jogadores,
+    denuncias,
+    fetchJogadores,
+    registrarDenuncia,
+    excluirDenuncia,
+  } = useDenunciasContext();
   const [descricao, setDescricao] = useState("");
   const [coddenunciado, setCodDenunciado] = useState("");
   const [imagem, setImagem] = useState(null);
   const fileInputRef = useRef(null);
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!coddenunciado || !descricao) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
+
     const formData = new FormData();
+    formData.append("denunciante_id", user.id);
     formData.append("denunciado_id", coddenunciado);
     formData.append("descricao", descricao);
     if (imagem) {
       formData.append("imagem", imagem);
     }
 
-    await registrarDenuncia(formData);
-    setDescricao("");
-    setCodDenunciado("");
-    setImagem(null);
+    console.log("Dados enviados:", Object.fromEntries(formData.entries()));
+
+    try {
+      await registrarDenuncia(formData);
+      alert("Denúncia registrada com sucesso!");
+      setDescricao("");
+      setCodDenunciado("");
+      setImagem(null);
+    } catch (error) {
+      console.error("Erro ao registrar denúncia:", error);
+      alert("Erro ao registrar denúncia. Tente novamente.");
+    }
   };
 
   const handleFileChange = (e) => {
@@ -73,7 +94,7 @@ const DenunciarJogador = () => {
           }}
         />
 
-        <SubmitButton text="Registrar Denúncia" />
+        <SubmitButton text="Registrar Denúncia" type="submit" />
       </form>
 
       <section className={styles.denunciasSection}>
