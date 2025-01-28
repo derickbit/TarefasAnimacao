@@ -24,10 +24,6 @@ function EditarPerfil() {
     }
   }, [currentUser]);
 
-  if (!token || !currentUser) {
-    return <Navigate to="/" />;
-  }
-
   // Função para atualizar os dados do usuário
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,9 +37,6 @@ function EditarPerfil() {
       };
 
       // Remover o campo `password` se estiver vazio
-      if (!payload.password) {
-        delete payload.password;
-      }
 
       // Enviar atualização
       const updatedUser = await updateUser(payload);
@@ -67,6 +60,7 @@ function EditarPerfil() {
     }
   };
 
+  //
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -112,7 +106,7 @@ function EditarPerfil() {
               />
             </div>
 
-            <div className={styles.formGroup}>
+            <div className={styles.formExcluirConta}>
               <SubmitButton
                 text="Editar Perfil"
                 type="submit"

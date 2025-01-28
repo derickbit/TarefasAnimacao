@@ -1,20 +1,19 @@
 .container {
-  width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
+  width: 100%;
 
-.start {
-  justify-content: flex-start;
+  margin: 0 auto; /* Garante centralização horizontal */
+  display: flex;
+  justify-content: center; /* Alinha conteúdo no centro por padrão */
+  flex-wrap: wrap; /* Ajusta para telas menores */
 }
 
 .column {
-  flex-direction: column;
+  flex-direction: column; /* Configuração de coluna */
   justify-content: flex-start;
 }
 
 .min_height {
-  min-height: 75vh;
+  min-height: 75vh; /* Define uma altura mínima */
 }
+
+/* Removido CSS duplicado para evitar sobrescrita */

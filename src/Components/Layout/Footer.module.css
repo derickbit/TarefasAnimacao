@@ -3,6 +3,28 @@
   color: #fff;
   padding: 3em;
   text-align: center;
+  width: 100%;
+  position: fixed; /* Fixa o rodapé no final da página */
+  bottom: 0; /* Garante que ele fique na parte inferior */
+  left: 0;
+}
+
+body {
+  margin: 0; /* Remove margens para alinhar o rodapé */
+  padding: 0; /* Remove o padding para evitar espaços desnecessários */
+  min-height: 100vh; /* Garante que o corpo ocupe a tela toda */
+  display: flex;
+  flex-direction: column;
+}
+
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Faz o conteúdo ocupar a altura total da tela */
+}
+
+.main-content {
+  flex: 1; /* Empurra o rodapé para o fim */
 }
 
 .social_list {
@@ -31,4 +53,10 @@
 .copy_right span {
   font-weight: bold;
   color: #acacac;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1em; /* Para manter espaçamento nas laterais */
 }

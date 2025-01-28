@@ -35,10 +35,36 @@ export default function DenunciasProvider({ children }) {
     }
   };
 
+  const fetchDenunciasDoUsuario = async () => {
+    try {
+      const response = await axiosClient.get("/denuncias/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data?.data || []; // Ajuste conforme a estrutura do retorno
+    } catch (error) {
+      console.error("Erro ao buscar denúncias do usuário:", error);
+      return [];
+    }
+  };
+
   const registrarDenuncia = async (formData) => {
     try {
       const response = await axiosClient.post("/denuncias", formData, {});
-      return response.data;
+
+      if (response.data?.data) {
+        setDenuncias((prev) =>
+          Array.isArray(prev)
+            ? [...prev, response.data.data]
+            : [response.data.data]
+        );
+      } else {
+        console.warn(
+          "Resposta inesperada ao registrar denúncia:",
+          response.data
+        );
+      }
+
+      return response.data; // Retorna a resposta, se necessário
     } catch (error) {
       console.error("Erro ao registrar denúncia:", error);
       throw error;
@@ -50,9 +76,18 @@ export default function DenunciasProvider({ children }) {
       await axiosClient.delete(`/denuncias/${coddenuncia}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setDenuncias((prev) =>
-        prev.filter((denuncia) => denuncia.coddenuncia !== coddenuncia)
-      );
+
+      // Garante que `prev` é um array
+      setDenuncias((prev) => {
+        if (Array.isArray(prev)) {
+          return prev.filter(
+            (denuncia) => denuncia.coddenuncia !== coddenuncia
+          );
+        } else {
+          console.warn("Estado `denuncias` não é um array:", prev);
+          return [];
+        }
+      });
     } catch (error) {
       console.error("Erro ao excluir denúncia:", error);
     }
@@ -60,7 +95,13 @@ export default function DenunciasProvider({ children }) {
 
   return (
     <DenunciasContext.Provider
-      value={{ denuncias, jogadores, registrarDenuncia, excluirDenuncia }}
+      value={{
+        denuncias,
+        jogadores,
+        fetchDenunciasDoUsuario,
+        registrarDenuncia,
+        excluirDenuncia,
+      }}
     >
       {children}
     </DenunciasContext.Provider>

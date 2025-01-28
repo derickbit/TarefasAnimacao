@@ -37,12 +37,11 @@ function Cadastro() {
       const response = await axiosClient.post("/users", payload);
       if (response.status === 201) {
         alert("Usuário criado com sucesso!");
-        navigate("/home");
+        navigate("/login");
       }
     } catch (error) {
       console.error(error);
 
-      // Tratamento de erros específicos
       if (error.response && error.response.status === 422) {
         const errors = error.response.data;
         let errorMessage = "Erro ao criar usuário:\n";
@@ -59,16 +58,19 @@ function Cadastro() {
   return (
     <div className={styles.bodyCadastro}>
       <main className={styles.mainCadastro}>
-        <img src={logo} alt="Logo Blackjack" className={styles.logo} />
-        <h1 className={styles.tituloCadastro}>Cadastro</h1>
-        <section className={styles.sectionCadastroForm}>
+        <div className={styles.imgContainer}>
+          <img src={logo} alt="Logo Blackjack" className={styles.logo} />
+
+          <h1 className={styles.titleCadastro}>Cadastro</h1>
           <form
             className={styles.formCadastro}
             onSubmit={onSubmit}
             method="POST"
           >
-            <div className={styles.formGroup}>
-              <label htmlFor="nome">Nome:</label>
+            <div className={styles.inputGroup}>
+              <label htmlFor="nome" className={styles.label}>
+                Nome:
+              </label>
               <input
                 type="text"
                 name="nome"
@@ -76,10 +78,13 @@ function Cadastro() {
                 value={name}
                 onChange={handleName}
                 required
+                className={styles.input}
               />
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Email:</label>
+            <div className={styles.inputGroup}>
+              <label htmlFor="email" className={styles.label}>
+                Email:
+              </label>
               <input
                 type="email"
                 name="email"
@@ -87,29 +92,33 @@ function Cadastro() {
                 value={email}
                 onChange={handleEmail}
                 required
+                className={styles.input}
               />
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="senha">Senha:</label>
+            <div className={styles.inputGroup}>
+              <label htmlFor="senha" className={styles.label}>
+                Senha:
+              </label>
               <input
                 type="password"
                 name="senha"
                 id="senha"
+                value={password}
                 onChange={handlePassword}
                 required
+                className={styles.input}
               />
             </div>
-            <div className={styles.formGroup}>
-              <SubmitButton text="Cadastrar" type="submit" />
-            </div>
+            <SubmitButton text="Cadastrar" type="submit" />
           </form>
-        </section>
-        <h3 className={styles.cadastroPrompt}>
-          Já possui cadastro?{" "}
-          <Link to="/login" className={styles.linkCadastro}>
-            Login
-          </Link>
-        </h3>
+
+          <h3 className={styles.prompt}>
+            Já possui cadastro?{" "}
+            <Link to="/login" className={styles.link}>
+              Login
+            </Link>
+          </h3>
+        </div>
       </main>
     </div>
   );

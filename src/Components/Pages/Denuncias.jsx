@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDenunciasContext } from "../../contexts/DenunciasProvider";
 import Input from "../../Components/Form/Input";
 import Select from "../../Components/Form/Select";
@@ -9,16 +9,35 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 const DenunciarJogador = () => {
   const {
     jogadores,
-    denuncias,
-    fetchJogadores,
+    fetchDenunciasDoUsuario,
     registrarDenuncia,
     excluirDenuncia,
   } = useDenunciasContext();
   const [descricao, setDescricao] = useState("");
+  const [minhasDenuncias, setMinhasDenuncias] = useState([]);
   const [coddenunciado, setCodDenunciado] = useState("");
   const [imagem, setImagem] = useState(null);
   const fileInputRef = useRef(null);
   const { user } = useAuthContext();
+
+  // Função para transformar a nova denúncia no formato esperado
+  const transformarNovaDenuncia = (novaDenuncia) => {
+    const { data } = novaDenuncia;
+
+    // Encontra o nome do denunciado com base no ID fornecido na denúncia
+    const nomeDenunciado = jogadores.find(
+      (jogador) => jogador.id === parseInt(data.denunciado_id)
+    )?.name;
+
+    // Retorna um objeto formatado com as informações da denúncia transformada
+    return {
+      coddenuncia: data.coddenuncia,
+      denunciado: { name: nomeDenunciado || "Nome não disponível" },
+      descricao: data.descricao || "Sem descrição",
+      imagem: data.imagem, // A URL da imagem deve vir do backend
+      created_at: data.created_at,
+    };
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,14 +55,22 @@ const DenunciarJogador = () => {
       formData.append("imagem", imagem);
     }
 
-    console.log("Dados enviados:", Object.fromEntries(formData.entries()));
-
     try {
-      await registrarDenuncia(formData);
-      alert("Denúncia registrada com sucesso!");
+      const novaDenuncia = await registrarDenuncia(formData);
+      console.log("Nova denúncia registrada:", novaDenuncia);
+
+      if (novaDenuncia) {
+        // Transformar a nova denúncia antes de adicioná-la ao estado
+        const denunciaFormatada = transformarNovaDenuncia(novaDenuncia);
+        setMinhasDenuncias((prev) => [...prev, denunciaFormatada]);
+        alert("Denúncia registrada com sucesso!");
+      }
+
+      // Limpar formulário
       setDescricao("");
       setCodDenunciado("");
       setImagem(null);
+      window.location.reload(); // Recarrega a página
     } catch (error) {
       console.error("Erro ao registrar denúncia:", error);
       alert("Erro ao registrar denúncia. Tente novamente.");
@@ -52,6 +79,35 @@ const DenunciarJogador = () => {
 
   const handleFileChange = (e) => {
     setImagem(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    // Função para carregar as denúncias do usuário
+    const carregarDenuncias = async () => {
+      try {
+        const denuncias = await fetchDenunciasDoUsuario();
+        console.log("Denúncias retornadas:", denuncias); // Verifique o conteúdo
+        setMinhasDenuncias(Array.isArray(denuncias) ? denuncias : []);
+      } catch (error) {
+        console.error("Erro ao carregar denúncias:", error);
+        setMinhasDenuncias([]);
+      }
+    };
+
+    carregarDenuncias(); // Chama a função ao montar o componente
+  }, []);
+
+  const handleExcluirDenuncia = async (coddenuncia) => {
+    try {
+      await excluirDenuncia(coddenuncia);
+      alert("Denúncia excluída com sucesso!");
+      setMinhasDenuncias((prev) =>
+        prev.filter((denuncia) => denuncia.coddenuncia !== coddenuncia)
+      );
+    } catch (error) {
+      console.error("Erro ao excluir denúncia:", error);
+      alert("Erro ao excluir denúncia. Tente novamente.");
+    }
   };
 
   return (
@@ -89,17 +145,19 @@ const DenunciarJogador = () => {
         <SubmitButton
           text={imagem ? "Arquivo Selecionado" : "Anexar Imagem (opcional)"}
           onClick={(e) => {
-            e.preventDefault();
-            fileInputRef.current.click();
+            e.preventDefault(); // Evita qualquer comportamento padrão
+            fileInputRef.current.click(); // Abre o seletor de arquivos
           }}
         />
+
+        {imagem && <p className={styles.fileName}>Arquivo: {imagem.name}</p>}
 
         <SubmitButton text="Registrar Denúncia" type="submit" />
       </form>
 
       <section className={styles.denunciasSection}>
         <h3>Minhas Denúncias</h3>
-        {denuncias.length > 0 ? (
+        {Array.isArray(minhasDenuncias) && minhasDenuncias.length > 0 ? (
           <table className={styles.table}>
             <thead>
               <tr>
@@ -112,27 +170,35 @@ const DenunciarJogador = () => {
               </tr>
             </thead>
             <tbody>
-              {denuncias.map((denuncia) => (
+              {minhasDenuncias.map((denuncia) => (
                 <tr key={denuncia.coddenuncia}>
                   <td>{denuncia.coddenuncia}</td>
-                  <td>{denuncia.denunciado.name}</td>
-                  <td>{denuncia.descricao}</td>
+                  <td>{denuncia.denunciado?.name || "Nome não disponível"}</td>
+                  <td>{denuncia.descricao || "Sem descrição"}</td>
                   <td>
                     {denuncia.imagem ? (
-                      <img
-                        src={`/imagens/${denuncia.imagem}`}
-                        alt="Imagem denúncia"
-                        width="50"
-                      />
+                      <a
+                        href={`http://localhost:8000/storage/denuncias/${denuncia.imagem}`}
+                        target="_blank"
+                        rel="noopener noreferrer" // Abre em uma nova aba
+                      >
+                        <img
+                          src={`http://localhost:8000/storage/denuncias/${denuncia.imagem}`}
+                          alt="Imagem denúncia"
+                          width="50"
+                        />
+                      </a>
                     ) : (
-                      "Nenhuma imagem anexada"
+                      "Nenhuma imagem"
                     )}
                   </td>
-                  <td>{denuncia.reg_date}</td>
+                  <td>{new Date(denuncia.created_at).toLocaleDateString()}</td>
                   <td>
                     <button
                       className={styles.deleteButton}
-                      onClick={() => excluirDenuncia(denuncia.coddenuncia)}
+                      onClick={() =>
+                        handleExcluirDenuncia(denuncia.coddenuncia)
+                      }
                     >
                       Excluir
                     </button>
@@ -142,7 +208,7 @@ const DenunciarJogador = () => {
             </tbody>
           </table>
         ) : (
-          <p>Nenhuma denúncia registrada.</p>
+          <p>Nenhuma denúncia encontrada</p>
         )}
       </section>
     </div>

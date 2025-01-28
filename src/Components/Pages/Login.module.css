@@ -1,10 +1,28 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f4f4f4; /* Cor de fundo neutra */
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #f4f4f4; /* Cor de fundo neutra */
 }
 
 .logo {
@@ -19,16 +37,11 @@
 }
 
 .form {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.formGroup {
+.inputGroup {
   margin-bottom: 15px;
 }
 
@@ -53,6 +66,8 @@
 }
 
 .button {
+  display: inline-flex;
+  flex: 1 1 auto;
   width: 100%;
   padding: 10px;
   background-color: #333;
@@ -76,12 +91,12 @@
   text-align: center;
 }
 
-.prompt a {
+.link {
   color: #007bff;
   text-decoration: none;
   font-weight: bold;
 }
 
-.prompt a:hover {
+.link:hover {
   text-decoration: underline;
 }

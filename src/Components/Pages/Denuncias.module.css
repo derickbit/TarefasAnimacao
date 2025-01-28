@@ -15,7 +15,9 @@
 .form {
   width: 100%;
   margin: 2em 0;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   gap: 1em; /* Adiciona espaçamento vertical entre os elementos do formulário */
@@ -23,4 +25,61 @@
 
 .form button {
   margin-top: 0.5em; /* Espaçamento extra opcional */
+}
+
+.fileName {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+  word-break: break-word;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table img {
+  border-radius: 4px;
+}
+
+.denunciasSection {
+  margin-top: 2rem;
+}
+
+.deleteButton {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.deleteButton:hover {
+  background-color: #e60000;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centraliza o conteúdo dentro do container */
 }

@@ -11,7 +11,7 @@ export const RankingProvider = ({ children }) => {
     const token = localStorage.getItem("authToken");
 
     axiosClient
-      .get("http://127.0.0.1:8000/api/partidas/ranking")
+      .get("/partidas/ranking")
       .then((response) => response.json())
       .then((data) => {
         setRanking(data);

@@ -1,10 +1,34 @@
-.container {
+.bodyCadastro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f4f4f4; /* Cor de fundo neutra */
+}
+
+.imgContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #f4f4f4; /* Cor de fundo neutra */
+}
+
+.mainCadastro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .logo {
@@ -12,23 +36,23 @@
   margin-bottom: 20px;
 }
 
-.title {
+.titleCadastro {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  font-weight: bold;
   color: #333;
+  margin-bottom: 20px;
 }
 
-.form {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
+.formContainer {
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.formGroup {
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
   margin-bottom: 15px;
 }
 
@@ -52,23 +76,6 @@
   outline: none;
 }
 
-.button {
-  width: 100%;
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.button:hover {
-  background-color: #555;
-}
-
 .prompt {
   margin-top: 20px;
   font-size: 0.9rem;
@@ -76,12 +83,12 @@
   text-align: center;
 }
 
-.prompt a {
+.link {
   color: #007bff;
   text-decoration: none;
   font-weight: bold;
 }
 
-.prompt a:hover {
+.link:hover {
   text-decoration: underline;
 }

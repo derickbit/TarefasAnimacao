@@ -1,81 +1,125 @@
+/* Centralização e estrutura do corpo */
 .bodyEditarPerfil {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  background-color: #222;
-  color: #fff;
+  justify-content: center;
+  min-height: 100%; /* Garante que ocupe 100% da altura da tela */
+  background-color: #f4f4f4;
+  color: #222;
+  padding: 2em; /* Espaçamento ao redor */
+  box-sizing: border-box;
 }
 
+/* Título da página */
 .tituloEditarPerfil {
-  margin-top: 1em;
   font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1em;
   text-align: center;
-  color: #fff;
+  color: #333;
 }
 
+/* Conteúdo principal */
 .mainEditarPerfil {
-  width: 90%;
-  max-width: 400px;
-  margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo */
+  width: 90%; /* Define uma largura proporcional para telas menores */
+  max-width: 500px; /* Limita a largura máxima */
+  background-color: #fff;
+  border-radius: 12px;
   padding: 2em;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Seção do formulário */
 .sectionEditarPerfil {
   display: flex;
   flex-direction: column;
+  gap: 1.5em;
+  width: 100%;
 }
 
+/* Formulário e inputs */
 .formEditarPerfil,
 .formExcluirConta {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
+
   gap: 0.5em;
+  width: 100%;
 }
 
 label {
-  font-size: 1em;
-  color: #fff;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #444;
 }
 
 input {
-  padding: 0.5em;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background-color: #444;
-  color: #fff;
+  padding: 0.8em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.3s ease;
 }
 
 input:focus {
   outline: none;
-  border-color: #888;
+  border-color: #777;
 }
 
-.btnAlterar,
-.btnExcluirConta {
-  padding: 0.7em;
+/* Botões */
+.submitButton,
+.submitButtonExcluir {
+  padding: 0.9em;
   font-size: 1em;
+  font-weight: bold;
   color: #fff;
   background-color: #444;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btnAlterar:hover {
-  background-color: #555;
+.submitButton:hover {
+  background-color: #222;
+  transform: scale(1.03);
 }
 
-.btnExcluirConta:hover {
+.submitButtonExcluir {
+  background-color: #d32f2f;
+}
+
+.submitButtonExcluir:hover {
   background-color: #b71c1c;
+}
+
+/* Rodapé */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+footer {
+  margin-top: auto;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
 }
