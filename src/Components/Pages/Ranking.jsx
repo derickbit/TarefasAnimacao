@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { RankingContext } from "../../contexts/rankingProvider";
 import RankingCard from "../Cards/RankingCard";
 import styles from "./Ranking.module.css";
 
 const RankingJogadores = () => {
-  const [ranking, setRanking] = useState([]);
+  const { ranking, loading } = useContext(RankingContext);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/partidas/ranking")
-      .then((response) => response.json())
-      .then((data) => setRanking(data))
-      .catch((error) => console.error("Erro ao buscar o ranking:", error));
-  }, []);
+  if (loading) {
+    return <p>Carregando ranking...</p>;
+  }
 
   return (
     <div className="project_container">
@@ -23,7 +21,7 @@ const RankingJogadores = () => {
             key={user.id}
             name={user.name}
             pontuacao={user.total_pontuacao}
-            position={index + 1} // Passe a posição aqui
+            position={index + 1}
           />
         ))}
       </div>

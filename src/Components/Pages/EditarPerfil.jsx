@@ -26,7 +26,7 @@ function EditarPerfil() {
 
   // Função para atualizar os dados do usuário
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Evita o comportamento padrão do formulário
 
     try {
       // Preparar o payload com os nomes corretos
@@ -39,7 +39,7 @@ function EditarPerfil() {
       // Remover o campo `password` se estiver vazio
 
       // Enviar atualização
-      const updatedUser = await updateUser(payload);
+      await updateUser(payload);
       alert("Perfil atualizado com sucesso!");
     } catch (error) {
       alert("Erro ao atualizar perfil. Tente novamente.");
@@ -60,7 +60,7 @@ function EditarPerfil() {
     }
   };
 
-  //
+  // Função para lidar com mudanças nos campos
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
