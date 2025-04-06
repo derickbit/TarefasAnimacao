@@ -15,6 +15,10 @@
   border: none;
 }
 
+.form_control input:focus {
+  border-bottom: 2px solid #1e1e1e;
+}
+
 .form_control input::placeholder {
   color: #7b7b7b;
 }

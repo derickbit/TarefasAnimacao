@@ -5,9 +5,12 @@
   text-decoration: none;
   transition: 0.5s;
   cursor: pointer;
-  border: none;
+  border: 1px solid #222;
 }
 
 .btn:hover {
-  color: #6e6e6e;
+  color: #222;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 1.05em;
 }

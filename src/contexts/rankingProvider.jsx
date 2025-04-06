@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import axiosClient from "../utils/axios_client";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const RankingContext = createContext();
 
 export const RankingProvider = ({ children }) => {

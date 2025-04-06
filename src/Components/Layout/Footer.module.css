@@ -35,10 +35,11 @@ body {
 
 .social_list li {
   margin: 0 1em;
+  transition: 0.3s;
 }
 
 .social_list li:hover {
-  color: #ffbb33;
+  color: #6e6e6e;
 }
 
 .social_list svg {

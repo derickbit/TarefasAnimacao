@@ -9,7 +9,7 @@ function Home() {
       <h2>
         Apresentamos
         <p>
-          <Link to="/partida">
+          <Link to="/partida" className={styles.playgame}>
             <img src={blackjack2} alt="Imagem do jogo Blackjack 2.0" />
           </Link>
         </p>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { RankingContext } from "../../contexts/rankingProvider";
+import { RankingContext } from "../../contexts/RankingProvider";
 import RankingCard from "../Cards/RankingCard";
 import styles from "./Ranking.module.css";
 
