@@ -45,3 +45,33 @@
 .playgame:hover {
   transform: scale(1.1);
 }
+
+.skeleton {
+  width: 300px;
+  height: 200px;
+  background-color: #ccc;
+  border-radius: 8px;
+  animation: pulse 1.2s infinite ease-in-out;
+  margin: 0 auto;
+}
+
+/* Você pode ajustar esse tamanho conforme a imagem real */
+
+@keyframes pulse {
+  0% {
+    background-color: #ddd;
+  }
+  50% {
+    background-color: #eaeaea;
+  }
+  100% {
+    background-color: #ddd;
+  }
+}
+
+.playgame img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
