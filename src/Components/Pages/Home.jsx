@@ -5,7 +5,15 @@ import { useState, useEffect } from "react";
 
 function Home() {
   const [loading, setLoading] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
 
+  const handleMouseEnter = () => {
+    setIsAnimating(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAnimating(false);
+  };
   useEffect(() => {
     // Simula o carregamento da imagem
     const timer = setTimeout(() => {
@@ -20,7 +28,15 @@ function Home() {
       <h1>Bem vindo(a) </h1>
       <h2>
         Apresentamos
-        <p>
+        <div
+          className={
+            isAnimating
+              ? "animate__animated animate__pulse animate__infinite"
+              : ""
+          }
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <Link to="/partida" className={styles.playgame}>
             {loading ? (
               <div className={styles.skeleton}></div>
@@ -28,7 +44,7 @@ function Home() {
               <img src={blackjack2} alt="Imagem do jogo Blackjack 2.0" />
             )}
           </Link>
-        </p>
+        </div>
         Clique na imagem para jogar
       </h2>
     </section>

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/blackjack_logo.jpg";
+import "animate.css";
 
 function Navbar() {
   const { setToken, setUser } = useAuthContext(); // Usa o contexto de autenticação
@@ -19,7 +20,9 @@ function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.navLeft}>
         <Link to="/" className={styles.link}>
-          <img src={logo} alt="Logo" className={styles.logo} />
+          <div className="animate__animated animate__zoomIn animate__infinite animate__slow">
+            <img src={logo} alt="Logo" className={styles.logo} />
+          </div>
         </Link>
         <ul className={styles.list}>
           <li className={styles.item}>

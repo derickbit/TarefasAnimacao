@@ -20,6 +20,7 @@ import DenunciasProvider from "./contexts/DenunciasProvider";
 import { RankingProvider } from "./contexts/RankingProvider";
 import { PartidasProvider } from "./contexts/PartidasProvider";
 import ProtectedRoute from "./Config/ProtectedRoute";
+import "animate.css";
 
 function AppContent() {
   const location = useLocation();
