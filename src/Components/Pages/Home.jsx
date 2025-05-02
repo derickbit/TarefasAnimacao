@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import blackjack2 from "../../assets/blackjack2.jpg";
 import styles from "./Home.module.css";
 import { useState, useEffect } from "react";
+import CardSuitsMorph from "../Cards/toMorph"; // Importa o componente de animação de naipes
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,10 @@ function Home() {
   return (
     <section className={styles.home_container}>
       <h1>Bem vindo(a) </h1>
+      <div>
+        <h1>Animação de Naipes</h1>
+        <CardSuitsMorph />
+      </div>
       <h2>
         Apresentamos
         <div

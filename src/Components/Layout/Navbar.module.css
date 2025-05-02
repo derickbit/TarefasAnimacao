@@ -44,8 +44,36 @@
   padding: 0;
 }
 
+.dropdown {
+  position: absolute; /* Garante que o menu seja posicionado relativo ao item */
+  top: 100%; /* Posiciona abaixo do botão Hamburger */
+  left: 0;
+  background-color: #222; /* Fundo do menu */
+  padding: 0.5em;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+  list-style: none;
+  display: flex;
+  flex-direction: column; /* Exibe os itens verticalmente */
+  gap: 0.5em; /* Espaçamento entre os ícones */
+  z-index: 10; /* Garante que o menu fique acima de outros elementos */
+}
+
+.dropdown li {
+  color: #fff; /* Cor dos ícones */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.dropdown li:hover {
+  color: #6e6e6e; /* Cor ao passar o mouse */
+}
+
 .item {
   margin-right: 1em;
+  display: flex; /* Garante que o conteúdo interno seja flexível */
+  align-items: center; /* Centraliza verticalmente */
+  position: relative; /* Necessário para posicionar o dropdown */
 }
 
 .item a {
