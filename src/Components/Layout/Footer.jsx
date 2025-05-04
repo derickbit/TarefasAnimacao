@@ -1,5 +1,6 @@
 import { DiReact, DiPhp, DiJsBadge, DiLaravel } from "react-icons/di";
 import styles from "./Footer.module.css";
+import CardSuitsMorph from "../Cards/toMorph"; // Importa o componente de animação de naipes
 
 function Footer() {
   return (
@@ -10,6 +11,9 @@ function Footer() {
         </li>
         <li>
           <DiPhp />
+        </li>
+        <li>
+          <CardSuitsMorph />
         </li>
         <li>
           <DiJsBadge />
