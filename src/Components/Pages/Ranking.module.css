@@ -1,9 +1,21 @@
 .project_container {
   padding: 2em;
+  height: 85vh; /* Altura total da tela menos o tamanho do navbar e footer */
+  display: flex;
+  flex-direction: column; /* Organiza os elementos verticalmente */
+  overflow: hidden; /* Remove o scroll geral */
 }
 
 .tittle_container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2em;
+}
+
+.ranking_list {
+  flex: 1; /* Faz o contêiner ocupar o espaço restante */
+  overflow-y: auto; /* Adiciona rolagem vertical apenas aqui */
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
 }

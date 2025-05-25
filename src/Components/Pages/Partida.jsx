@@ -45,8 +45,8 @@ const SimularPartidas = () => {
 
       {mensagem && <p className={styles.message}>{mensagem}</p>}
 
+      <h3>Histórico de Partidas</h3>
       <section className={styles.historicoSection}>
-        <h3>Histórico de Partidas</h3>
         {historico.length > 0 ? (
           <table className={styles.table}>
             <thead>

@@ -111,106 +111,114 @@ const DenunciarJogador = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Denunciar Jogador</h1>
+    <div className={styles.denuncia_container}>
+      {/* Seção do formulário */}
+      <div className={styles.denuncias_section}>
+        <h3 className={styles.form_title}>Denunciar Jogador</h3>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <Select
-          text="Jogador a ser denunciado"
-          name="coddenunciado"
-          options={jogadores.map((jogador) => ({
-            id: jogador.id,
-            name: jogador.name,
-          }))}
-          handleOnChange={(e) => setCodDenunciado(e.target.value)}
-          value={coddenunciado}
-        />
+        <div className={styles.form_section}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formGroup}>
+              <Select
+                text="Jogador a ser denunciado"
+                name="coddenunciado"
+                options={jogadores.map((jogador) => ({
+                  id: jogador.id,
+                  name: jogador.name,
+                }))}
+                handleOnChange={(e) => setCodDenunciado(e.target.value)}
+                value={coddenunciado}
+              />
+            </div>
 
-        <Input
-          type="text"
-          text="Descrição da Denúncia"
-          name="descricao"
-          placeholder="Descreva a denúncia"
-          handleOnChange={(e) => setDescricao(e.target.value)}
-          value={descricao}
-        />
+            <div className={styles.formGroup}>
+              <Input
+                type="text"
+                text="Descrição da Denúncia"
+                name="descricao"
+                placeholder="Descreva a denúncia"
+                handleOnChange={(e) => setDescricao(e.target.value)}
+                value={descricao}
+              />
+            </div>
 
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
+            <div className={styles.formGroup}>
+              <Input
+                type="file"
+                text="Anexar Imagem (opcional)"
+                name="imagem"
+                handleOnChange={(e) => setImagem(e.target.files[0])}
+              />
+            </div>
 
-        <SubmitButton
-          text={imagem ? "Arquivo Selecionado" : "Anexar Imagem (opcional)"}
-          onClick={(e) => {
-            e.preventDefault(); // Evita qualquer comportamento padrão
-            fileInputRef.current.click(); // Abre o seletor de arquivos
-          }}
-        />
+            <SubmitButton text="Registrar Denúncia" type="submit" />
+          </form>
+        </div>
+      </div>
 
-        {imagem && <p className={styles.fileName}>Arquivo: {imagem.name}</p>}
-
-        <SubmitButton text="Registrar Denúncia" type="submit" />
-      </form>
-
-      <section className={styles.denunciasSection}>
-        <h3>Minhas Denúncias</h3>
-        {Array.isArray(minhasDenuncias) && minhasDenuncias.length > 0 ? (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Denunciado</th>
-                <th>Descrição</th>
-                <th>Imagem</th>
-                <th>Data</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {minhasDenuncias.map((denuncia) => (
-                <tr key={denuncia.coddenuncia}>
-                  <td>{denuncia.coddenuncia}</td>
-                  <td>{denuncia.denunciado?.name || "Nome não disponível"}</td>
-                  <td>{denuncia.descricao || "Sem descrição"}</td>
-                  <td>
-                    {denuncia.imagem ? (
-                      <a
-                        href={`http://localhost:8000/storage/denuncias/${denuncia.imagem}`}
-                        target="_blank"
-                        rel="noopener noreferrer" // Abre em uma nova aba
-                      >
-                        <img
-                          src={`http://localhost:8000/storage/denuncias/${denuncia.imagem}`}
-                          alt="Imagem denúncia"
-                          width="50"
-                        />
-                      </a>
-                    ) : (
-                      "Nenhuma imagem"
-                    )}
-                  </td>
-                  <td>{new Date(denuncia.created_at).toLocaleDateString()}</td>
-                  <td>
-                    <button
-                      className={styles.deleteButton}
-                      onClick={() =>
-                        handleExcluirDenuncia(denuncia.coddenuncia)
-                      }
-                    >
-                      Excluir
-                    </button>
-                  </td>
+      {/* Seção da lista de denúncias */}
+      <div className={styles.denuncias_section}>
+        <h3 className={styles.denuncias_title}>Minhas Denúncias</h3>
+        <section className={styles.denunciasSection}>
+          {Array.isArray(minhasDenuncias) && minhasDenuncias.length > 0 ? (
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Denunciado</th>
+                  <th>Descrição</th>
+                  <th>Imagem</th>
+                  <th>Data</th>
+                  <th>Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>Nenhuma denúncia encontrada</p>
-        )}
-      </section>
+              </thead>
+              <tbody>
+                {minhasDenuncias.map((denuncia) => (
+                  <tr key={denuncia.coddenuncia}>
+                    <td>{denuncia.coddenuncia}</td>
+                    <td>
+                      {denuncia.denunciado?.name || "Nome não disponível"}
+                    </td>
+                    <td>{denuncia.descricao || "Sem descrição"}</td>
+                    <td>
+                      {denuncia.imagem ? (
+                        <a
+                          href={`http://localhost:8000/storage/denuncias/${denuncia.imagem}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <img
+                            src={`http://localhost:8000/storage/denuncias/${denuncia.imagem}`}
+                            alt="Imagem denúncia"
+                            width="50"
+                          />
+                        </a>
+                      ) : (
+                        "Nenhuma imagem"
+                      )}
+                    </td>
+                    <td>
+                      {new Date(denuncia.created_at).toLocaleDateString()}
+                    </td>
+                    <td>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={() =>
+                          handleExcluirDenuncia(denuncia.coddenuncia)
+                        }
+                      >
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>Nenhuma denúncia encontrada</p>
+          )}
+        </section>
+      </div>
     </div>
   );
 };

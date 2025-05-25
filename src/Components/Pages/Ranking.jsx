@@ -11,11 +11,11 @@ const RankingJogadores = () => {
   }
 
   return (
-    <div className="project_container">
-      <div className="tittle_container">
+    <div className={styles.project_container}>
+      <div className={styles.tittle_container}>
         <h1>Ranking</h1>
       </div>
-      <div className="ranking_list">
+      <div className={styles.ranking_list}>
         {ranking.map((user, index) => (
           <RankingCard
             key={user.id}

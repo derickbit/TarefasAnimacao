@@ -13,9 +13,8 @@ export const RankingProvider = ({ children }) => {
 
     axiosClient
       .get("/partidas/ranking")
-      .then((response) => response.json())
-      .then((data) => {
-        setRanking(data);
+      .then((response) => {
+        setRanking(response.data); // Acessa diretamente response.data
         setLoading(false);
       })
       .catch((error) => {

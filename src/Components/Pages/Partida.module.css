@@ -1,4 +1,3 @@
-/* Geral */
 .container {
   max-width: 900px;
   margin: 20px auto;
@@ -6,7 +5,15 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centraliza o conteúdo dentro do container */
+  text-align: center;
+  max-height: 100vh; /* Limita a altura ao tamanho da tela */
+  overflow-y: auto; /* Permite rolagem no contêiner principal */
+}
+
+.historicoSection {
+  max-height: 400px; /* Define uma altura máxima para o histórico */
+  overflow-y: auto; /* Adiciona rolagem vertical */
+  margin-top: 20px;
 }
 
 h1 {
@@ -14,12 +21,17 @@ h1 {
   margin-bottom: 20px;
   text-align: center; /* Centraliza o título */
 }
+h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center; /* Centraliza o título */
+  padding: 10px; /* Espaçamento interno opcional */
+}
 
 button:hover {
   background-color: #0056b3;
 }
 
-/* Tabela de histórico de partidas */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -34,8 +46,8 @@ button:hover {
 }
 
 .table th {
-  background-color: #f9f9f9; /* Remove o fundo azul */
-  color: #333; /* Altera a cor do texto */
+  background-color: #f9f9f9;
+  color: #333;
   font-weight: bold;
 }
 

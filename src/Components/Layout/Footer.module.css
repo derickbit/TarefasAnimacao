@@ -1,7 +1,7 @@
 .footer {
   background-color: #222;
   color: #fff;
-  padding: 3em;
+  padding: 1em;
   text-align: center;
   width: 100%;
   position: fixed; /* Fixa o rodapé no final da página */
@@ -34,7 +34,7 @@ body {
 }
 
 .social_list li {
-  margin: 0 1em;
+  margin: 0 2em;
   transition: 0.3s;
 }
 
@@ -48,7 +48,8 @@ body {
 }
 
 .copy_right {
-  margin-top: 2em;
+  font-size: 0.8em;
+  margin-top: 1em;
 }
 
 .copy_right span {

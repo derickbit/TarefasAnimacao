@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import blackjack2 from "../../assets/blackjack2.jpg";
 import styles from "./Home.module.css";
 import { useState, useEffect } from "react";
-import CardSuitsMorph from "../Cards/toMorph"; // Importa o componente de animação de naipes
 
 function Home() {
   const [loading, setLoading] = useState(true);

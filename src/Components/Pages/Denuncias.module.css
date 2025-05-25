@@ -1,37 +1,129 @@
 .denuncia_container {
-  width: 450px;
-  margin: 0 auto;
-  padding: 3em;
-}
-
-.denuncia_container h1 {
-  margin-bottom: 0.5em;
-}
-
-.denuncia_container p {
-  color: #7b7b7b;
-}
-
-.form {
+  display: flex; /* Organiza os elementos lado a lado */
+  justify-content: space-between; /* Espaça o formulário e a lista */
+  align-items: flex-start; /* Alinha os itens no topo */
   width: 100%;
-  margin: 2em 0;
+  max-width: 1200px; /* Limita a largura máxima */
+  margin: 0 auto;
+  padding: 2em;
+  gap: 2em; /* Espaçamento entre o formulário e a lista */
+}
+
+.title_section {
   display: flex;
+  justify-content: space-between; /* Espaça os títulos horizontalmente */
   align-items: center;
-  justify-content: center;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.form_title,
+.denuncias_title {
+  font-size: 1.8em;
+  font-weight: bold;
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 1em;
+  color: #333;
+  width: 100%; /* Garante que o título ocupe toda a largura do container */
+}
+
+.form_section {
   display: flex;
   flex-direction: column;
-  gap: 1em; /* Adiciona espaçamento vertical entre os elementos do formulário */
+  align-items: center; /* Centralizes the form */
+  justify-content: center;
+  width: 90%; /* Matches the width of EditarPerfil */
+  max-width: 500px; /* Limits the maximum width */
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2em;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Matches the shadow style */
+  margin: 0 auto; /* Centers the form horizontally */
 }
 
-.form button {
-  margin-top: 0.5em; /* Espaçamento extra opcional */
+.denuncias_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo */
+  width: 58%; /* A lista ocupa 58% da largura */
 }
 
-.fileName {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 0.5rem;
-  word-break: break-word;
+.denunciasSection {
+  overflow-y: auto; /* Adiciona rolagem vertical */
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-height: 500px; /* Define uma altura máxima fixa para a lista */
+  width: 100%;
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+label {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #444;
+}
+
+input,
+select {
+  padding: 0.8em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #777;
+}
+
+.submitButton {
+  padding: 0.9em;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: #444;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.submitButton:hover {
+  background-color: #222;
+  transform: scale(1.03);
+}
+
+.denuncias_section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha o título à esquerda */
+  width: 58%; /* A lista ocupa 58% da largura */
+}
+
+.denunciasSection {
+  overflow-y: auto; /* Adiciona rolagem vertical */
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-height: 500px; /* Define uma altura máxima fixa para a lista */
+  width: 100%;
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
 }
 
 .table {
@@ -50,36 +142,4 @@
 .table th {
   background-color: #f4f4f4;
   font-weight: bold;
-}
-
-.table img {
-  border-radius: 4px;
-}
-
-.denunciasSection {
-  margin-top: 2rem;
-}
-
-.deleteButton {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.deleteButton:hover {
-  background-color: #e60000;
-}
-
-.container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centraliza o conteúdo dentro do container */
 }
