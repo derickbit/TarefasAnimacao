@@ -11,6 +11,8 @@ export const RankingProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
 
+    //coment generico
+
     axiosClient
       .get("/partidas/ranking")
       .then((response) => {

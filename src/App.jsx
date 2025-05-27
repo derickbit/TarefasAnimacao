@@ -17,7 +17,7 @@ import EditarPerfil from "./Components/Pages/EditarPerfil";
 import { AuthProvider } from "./contexts/AuthProvider";
 import UsersProvider from "./contexts/UsersProvider";
 import DenunciasProvider from "./contexts/DenunciasProvider";
-import { RankingProvider } from "./contexts/RankingProvider";
+import { RankingProvider } from "./contexts/RankingProvider.jsx";
 import { PartidasProvider } from "./contexts/PartidasProvider.jsx";
 import ProtectedRoute from "./Config/ProtectedRoute";
 import "animate.css";
