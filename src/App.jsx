@@ -8,7 +8,7 @@ import Navbar from "./Components/Layout/Navbar";
 import Container from "./Components/Layout/Container";
 import Home from "./Components/Pages/Home";
 import Footer from "./Components/Layout/Footer";
-import Denuncias from "./Components/Pages/Denuncias";
+import Reports from "./Components/Pages/Reports";
 import Ranking from "./Components/Pages/Ranking";
 import Partida from "./Components/Pages/Partida";
 import Login from "./Components/Pages/Login";
@@ -16,18 +16,33 @@ import Cadastro from "./Components/Pages/Cadastro";
 import EditarPerfil from "./Components/Pages/EditarPerfil";
 import { AuthProvider } from "./contexts/AuthProvider";
 import UsersProvider from "./contexts/UsersProvider";
-import DenunciasProvider from "./contexts/DenunciasProvider";
+import ReportsProvider from "./contexts/ReportsProvider";
 import { RankingProvider } from "./contexts/RankingProvider.jsx";
 import { PartidasProvider } from "./contexts/PartidasProvider.jsx";
 import ProtectedRoute from "./Config/ProtectedRoute";
 import "animate.css";
+import AguardeVerificacao from "./Components/Pages/AguardeVerificacao";
+import EmailVerificado from "./Components/Pages/EmailVerificado";
+import EsqueciSenha from "./Components/Pages/EsqueciSenha";
+import RedefinirSenha from "./Components/Pages/RedefinirSenha";
 
 function AppContent() {
   const location = useLocation();
 
   // Rotas onde a Navbar não aparece
-  const hideNavbarRoutes = ["/login", "/cadastro"];
-  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  const hideNavbarRoutes = [
+    "/login",
+    "/cadastro",
+    "/aguarde-verificacao",
+    "/email-verificado",
+    "/redefinir-senha",
+    "/esqueci-senha",
+  ];
+
+  // Check for exact matches or dynamic route patterns
+  const shouldHideNavbar =
+    hideNavbarRoutes.includes(location.pathname) ||
+    /^\/redefinir-senha\/[^/]+$/.test(location.pathname);
 
   return (
     <>
@@ -44,10 +59,10 @@ function AppContent() {
             }
           />
           <Route
-            path="/denuncias"
+            path="/Reports"
             element={
               <ProtectedRoute>
-                <Denuncias />
+                <Reports />
               </ProtectedRoute>
             }
           />
@@ -69,6 +84,10 @@ function AppContent() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/aguarde-verificacao" element={<AguardeVerificacao />} />
+          <Route path="/email-verificado" element={<EmailVerificado />} />
+          <Route path="/esqueci-senha" element={<EsqueciSenha />} />
+          <Route path="/redefinir-senha/:token" element={<RedefinirSenha />} />
           <Route
             path="/perfil"
             element={
@@ -88,15 +107,15 @@ function App() {
   return (
     <AuthProvider>
       <UsersProvider>
-        <DenunciasProvider>
-          <PartidasProvider>
-            <RankingProvider>
+        <ReportsProvider>
+          <RankingProvider>
+            <PartidasProvider>
               <Router>
                 <AppContent />
               </Router>
-            </RankingProvider>
-          </PartidasProvider>
-        </DenunciasProvider>
+            </PartidasProvider>
+          </RankingProvider>
+        </ReportsProvider>
       </UsersProvider>
     </AuthProvider>
   );

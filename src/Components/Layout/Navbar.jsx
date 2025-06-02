@@ -3,27 +3,29 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/blackjack_logo.jpg";
 import "animate.css";
-import Logo from "./Logo"; // Importa o componente Logo
+import Logo from "./Logo";
 import Hamburger from "../Cards/Hamburger";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { DiGithubBadge } from "react-icons/di";
-import { useState } from "react"; // Importa o hook useState para gerenciar o estado do dropdown
+import { useState } from "react";
 
 function Navbar() {
-  const { setToken, setUser } = useAuthContext(); // Usa o contexto de autenticação
-  const navigate = useNavigate(); // Usa navegação para redirecionar após logout
+  const { setToken, setUser } = useAuthContext();
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isHamburgerActive, setIsHamburgerActive] = useState(false);
 
   const handleLogout = () => {
-    setToken(null); // Remove o token do contexto
-    setUser(null); // Remove o usuário do contexto
-    localStorage.removeItem("ACCESS_TOKEN"); // Remove o token do localStorage
-    navigate("/"); // Redireciona para a página de login
+    setToken(null);
+    setUser(null);
+    localStorage.removeItem("ACCESS_TOKEN");
+    navigate("/");
     alert("Você foi deslogado!");
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev); // Alterna o estado do menu
+  const handleSociaisClick = () => {
+    setIsDropdownOpen((prev) => !prev);
+    setIsHamburgerActive((prev) => !prev);
   };
 
   return (
@@ -39,9 +41,7 @@ function Navbar() {
           <li className={styles.item}>
             <Link to="/perfil">Editar Perfil</Link>
           </li>
-          <li className={styles.item}>
-            <Link to="/denuncias">Denuncias</Link>
-          </li>
+
           <li className={styles.item}>
             <Link to="/ranking">Ranking</Link>
           </li>
@@ -49,29 +49,75 @@ function Navbar() {
             <Link to="/partida">Partida</Link>
           </li>
           <li className={styles.item}>
-            <div onClick={toggleDropdown}>
-              <Hamburger border={false} />
+            <Link to="/reports">Contato</Link>
+          </li>
+          <li
+            className={styles.item}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5em",
+              position: "relative",
+            }}
+          >
+            <div
+              onClick={handleSociaisClick}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+                color: "#fff",
+                fontWeight: "bold",
+                userSelect: "none",
+              }}
+              className={styles.link}
+            >
+              <span style={{ marginRight: "0.5em" }}>Sociais:</span>
+              <Hamburger border={false} active={isHamburgerActive} />
             </div>
             {isDropdownOpen && (
-              <ul className={styles.dropdown}>
+              <ul
+                className={styles.dropdown}
+                style={{
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  minWidth: "120px",
+                }}
+              >
                 <li>
-                  <FaFacebook />
+                  <Link
+                    to="https://www.linkedin.com/in/derick-bitencourte-da-silva/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "inherit",
+                    }}
+                  >
+                    <DiGithubBadge /> <p>GitHub</p>
+                  </Link>
                 </li>
                 <li>
-                  <FaInstagram />
-                </li>
-                <li>
-                  <FaLinkedin />
-                </li>
-                <li>
-                  <DiGithubBadge />
+                  <Link
+                    to="https://github.com/derickbit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "inherit",
+                    }}
+                  >
+                    <FaLinkedin /> <p>Linkedin</p>
+                  </Link>
                 </li>
               </ul>
             )}
           </li>
         </ul>
       </div>
-      <button className={styles.logout} onClick={handleLogout || alert("Sair")}>
+      <button className={styles.logout} onClick={handleLogout}>
         Sair
       </button>
     </nav>

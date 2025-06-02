@@ -1,21 +1,48 @@
 .project_container {
-  padding: 2em;
-  height: 85vh; /* Altura total da tela menos o tamanho do navbar e footer */
+  min-height: 80vh;
   display: flex;
-  flex-direction: column; /* Organiza os elementos verticalmente */
-  overflow: hidden; /* Remove o scroll geral */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  padding: 3em 1em;
+}
+
+.ranking_box {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.1);
+  padding: 2em 2em 1.5em 2em;
+  max-width: 420px;
+  width: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tittle_container {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 2em;
+  justify-content: center;
+  margin-bottom: 1.5em;
+}
+
+.tittle_container h1 {
+  font-size: 2.2rem;
+  color: #222;
+  letter-spacing: 1px;
+  font-weight: bold;
+  margin: 0;
 }
 
 .ranking_list {
-  flex: 1; /* Faz o contêiner ocupar o espaço restante */
-  overflow-y: auto; /* Adiciona rolagem vertical apenas aqui */
-  padding: 5px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  width: 100%;
+  max-height: 55vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0 1em;
+  background: transparent;
+  border: none;
 }

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
 import axiosClient from "../utils/axios_client";
 import { useAuthContext } from "./AuthProvider";
+import { RankingContext } from "./RankingProvider";
 
 const PartidasContext = createContext();
 
@@ -10,6 +11,7 @@ export const usePartidas = () => {
 
 export const PartidasProvider = ({ children }) => {
   const { user } = useAuthContext(); // Obtém o usuário autenticado
+  const { fetchRanking } = useContext(RankingContext);
   const [mensagem, setMensagem] = useState("");
   const [historico, setHistorico] = useState([]); // Estado para armazenar o histórico de partidas
 
@@ -32,6 +34,8 @@ export const PartidasProvider = ({ children }) => {
 
       // Atualiza o histórico após a nova partida ser criada
       await fetchHistoricoPartidas();
+      // Atualiza o ranking após a nova partida ser criada
+      await fetchRanking();
     } catch (error) {
       console.error("Erro ao sortear partida:", error);
       setMensagem(

@@ -4,10 +4,6 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
-  height: 100vh; /* Garante que o corpo ocupe a altura total da tela */
-  overflow: hidden; /* Remove qualquer scroll geral */
-  display: flex;
-  flex-direction: column;
 }
 
 html,
@@ -19,6 +15,6 @@ body,
   margin: 0;
   display: flex;
   padding: 0;
-  overflow-x: hidden; /* Evita rolagem horizontal */
-  flex-direction: column;
+  /* overflow-x: hidden; Evita rolagem horizontal */
+  /* flex-direction: column; */
 }

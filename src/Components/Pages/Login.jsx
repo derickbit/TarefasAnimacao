@@ -1,10 +1,10 @@
-import styles from "./Login.module.css";
+import styles from "./forms.module.css";
 import logo from "../../assets/blackjack_logo.jpg";
 import { Link } from "react-router-dom";
 import axiosClient from "../../utils/axios_client";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthProvider";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import SubmitButton from "../Form/SubmitButton";
 
 function Login() {
@@ -12,6 +12,7 @@ function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const [mensagemErro, setMensagemErro] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -34,9 +35,11 @@ function Login() {
       navigate("/");
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-      const errorMessage = document.getElementById("mensagemErro");
-      errorMessage.textContent = "Credenciais inválidas. Tente novamente!";
-      errorMessage.style.display = "block";
+      // Tenta pegar a mensagem do backend, senão mostra mensagem padrão
+      const msg =
+        error?.response?.data?.message ||
+        "Credenciais inválidas. Tente novamente!";
+      setMensagemErro(msg);
     }
   };
 
@@ -46,6 +49,7 @@ function Login() {
         <div className={styles.container}>
           <img src={logo} alt="Logo Blackjack" className={styles.logo} />
           <h1 className={styles.title}>Login</h1>
+          {mensagemErro && <p className={styles.prompt}>{mensagemErro}</p>}
           <form className={styles.form} method="post" onSubmit={onSubmit}>
             <div className={styles.inputGroup}>
               <label htmlFor="email" className={styles.label}>
@@ -79,7 +83,11 @@ function Login() {
               className={styles.button}
             />
           </form>
-
+          <h3 className={styles.prompt}>
+            <Link to="/esqueci-senha" className={styles.link}>
+              Esqueci minha senha
+            </Link>
+          </h3>
           <h3 className={styles.prompt}>
             Não possui login?{" "}
             <Link to="/cadastro" className={styles.link}>

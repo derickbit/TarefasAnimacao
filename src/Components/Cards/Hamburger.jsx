@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { HamburgerStyled } from "./Hamburger.styled";
 import { animate, createScope, svg, utils } from "animejs";
 
-const Hamburger = ({ width, height, border }) => {
+const Hamburger = ({ width, height, border, active }) => {
   const rootScope = useRef(null);
   const scope = useRef(null);
 
@@ -35,11 +35,14 @@ const Hamburger = ({ width, height, border }) => {
         reverse: true,
       });
 
-      self.add("runAnimation", () => {
-        if (openToClosed.targets[0].style.opacity == 1) {
+      // Corrigido: usa isActive para decidir a direção da animação
+      self.add("runAnimation", (isActive) => {
+        if (isActive) {
+          // Hamburger → X
           openToClosed.play();
           closeToOpened.play();
         } else {
+          // X → Hamburger
           closeToOpened.reverse();
           openToClosed.reverse();
         }
@@ -49,13 +52,21 @@ const Hamburger = ({ width, height, border }) => {
     return () => scope.current.revert();
   }, []);
 
+  // Permite animação controlada externamente via prop "active"
+  useEffect(() => {
+    if (typeof active !== "undefined") {
+      scope.current?.methods.runAnimation(active);
+    }
+    // eslint-disable-next-line
+  }, [active]);
+
   const handleAnimationStart = () => scope.current.methods.runAnimation();
 
   return (
     <HamburgerStyled
       ref={rootScope}
       $hasBorder={border}
-      onClick={handleAnimationStart}
+      onClick={typeof active === "undefined" ? handleAnimationStart : undefined}
     >
       <svg
         width={width ?? "25"}

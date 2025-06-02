@@ -47,7 +47,8 @@
 .dropdown {
   position: absolute; /* Garante que o menu seja posicionado relativo ao item */
   top: 100%; /* Posiciona abaixo do botão Hamburger */
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #222; /* Fundo do menu */
   padding: 0.5em;
   border-radius: 5px;

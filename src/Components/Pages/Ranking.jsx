@@ -12,18 +12,20 @@ const RankingJogadores = () => {
 
   return (
     <div className={styles.project_container}>
-      <div className={styles.tittle_container}>
-        <h1>Ranking</h1>
-      </div>
-      <div className={styles.ranking_list}>
-        {ranking.map((user, index) => (
-          <RankingCard
-            key={user.id}
-            name={user.name}
-            pontuacao={user.total_pontuacao}
-            position={index + 1}
-          />
-        ))}
+      <div className={styles.ranking_box}>
+        <div className={styles.tittle_container}>
+          <h1>Ranking</h1>
+        </div>
+        <div className={styles.ranking_list}>
+          {ranking.map((user, index) => (
+            <RankingCard
+              key={user.id}
+              name={user.name}
+              pontuacao={user.total_pontuacao}
+              position={index + 1}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

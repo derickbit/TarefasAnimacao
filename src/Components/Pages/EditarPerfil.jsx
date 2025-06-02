@@ -1,134 +1,205 @@
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import styles from "./EditarPerfil.module.css";
-import { useAuthContext } from "../../contexts/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import styles from "./forms.module.css";
+import logo from "../../assets/blackjack_logo.jpg";
 import { useUsersContext } from "../../contexts/UsersProvider";
 import SubmitButton from "../Form/SubmitButton";
 
 function EditarPerfil() {
-  const { token } = useAuthContext();
   const { currentUser, updateUser, deleteUser } = useUsersContext();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    senha: "",
-  });
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [mensagemErro, setMensagemErro] = useState("");
+  const [showPasswordRules, setShowPasswordRules] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  const passwordRules = [
+    {
+      label: "Ao menos 6 caracteres",
+      test: (pw) => pw.length >= 6,
+    },
+    {
+      label: "Ao menos uma letra",
+      test: (pw) => /[A-Za-z]/.test(pw),
+    },
+    {
+      label: "Ao menos um número",
+      test: (pw) => /\d/.test(pw),
+    },
+  ];
+
+  function isValidPassword(password) {
+    return passwordRules.every((rule) => rule.test(password));
+  }
 
   useEffect(() => {
     if (currentUser) {
-      setFormData({
-        name: currentUser.name || "",
-        email: currentUser.email || "",
-        senha: "", // Mantemos vazio inicialmente
-      });
+      setName(currentUser.name || "");
+      setEmail(currentUser.email || "");
     }
   }, [currentUser]);
 
-  // Função para atualizar os dados do usuário
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Evita o comportamento padrão do formulário
+  const handleName = (event) => setName(event.target.value);
+  const handleEmail = (event) => setEmail(event.target.value);
+  const handleSenha = (event) => setSenha(event.target.value);
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setMensagemErro("");
+    setLoading(true);
+
+    if (!name || !email || !senha) {
+      setMensagemErro("Preencha todos os campos.");
+      setLoading(false);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setMensagemErro("Digite um email válido.");
+      setLoading(false);
+      return;
+    }
+
+    if (!isValidPassword(senha)) {
+      setMensagemErro(
+        "A senha deve ter pelo menos 6 caracteres, incluindo letras e números."
+      );
+      setLoading(false);
+      return;
+    }
+
+    const payload = {
+      name,
+      email,
+      password: senha,
+    };
 
     try {
-      // Preparar o payload com os nomes corretos
-      const payload = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.senha, // Backend espera "password" em vez de "senha"
-      };
-
-      // Remover o campo `password` se estiver vazio
-
-      // Enviar atualização
       await updateUser(payload);
       alert("Perfil atualizado com sucesso!");
+      setSenha("");
     } catch (error) {
-      alert("Erro ao atualizar perfil. Tente novamente.");
+      setMensagemErro("Erro ao atualizar perfil. Tente novamente.");
     }
+    setLoading(false);
   };
 
-  // Função para excluir a conta
-  const handleDelete = async (e) => {
-    e.preventDefault();
-
+  const onDelete = async (event) => {
+    event.preventDefault();
     if (window.confirm("Tem certeza que deseja excluir sua conta?")) {
       try {
         await deleteUser();
         alert("Conta excluída com sucesso!");
+        navigate("/login");
       } catch (error) {
-        alert("Erro ao excluir conta. Tente novamente.");
+        setMensagemErro("Erro ao excluir conta. Tente novamente.");
       }
     }
   };
 
-  // Função para lidar com mudanças nos campos
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   return (
-    <div className={styles.bodyEditarPerfil}>
-      <h1 className={styles.tituloEditarPerfil}>Editar Perfil</h1>
-      <main className={styles.mainEditarPerfil}>
-        <section className={styles.sectionEditarPerfil}>
-          <form className={styles.formEditarPerfil} onSubmit={handleSubmit}>
-            <div className={styles.formGroup}>
-              <label htmlFor="nome">Nome:</label>
+    <div className={`${styles.loginContainer} ${styles.centerBelowNavbar}`}>
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Editar Perfil</h1>
+          {mensagemErro && <p className={styles.prompt}>{mensagemErro}</p>}
+          <form className={styles.form} onSubmit={onSubmit} method="POST">
+            <div className={styles.inputGroup}>
+              <label htmlFor="nome" className={styles.label}>
+                Nome:
+              </label>
               <input
                 type="text"
+                name="nome"
                 id="nome"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
+                value={name}
+                onChange={handleName}
                 required
+                className={styles.input}
               />
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="email">Email:</label>
+            <div className={styles.inputGroup}>
+              <label htmlFor="email" className={styles.label}>
+                Email:
+              </label>
               <input
                 type="email"
-                id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                id="email"
+                value={email}
+                onChange={handleEmail}
                 required
+                className={styles.input}
               />
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="senha">Senha:</label>
+            <div className={styles.inputGroup} style={{ position: "relative" }}>
+              <label htmlFor="senha" className={styles.label}>
+                Senha:
+              </label>
               <input
                 type="password"
-                id="senha"
                 name="senha"
-                value={formData.senha}
-                onChange={handleChange}
+                id="senha"
+                value={senha}
+                onChange={handleSenha}
+                onFocus={() => setShowPasswordRules(true)}
+                onBlur={() => setShowPasswordRules(false)}
                 required
+                className={styles.input}
+                autoComplete="new-password"
               />
+              {showPasswordRules && (
+                <div className={styles.passwordPopover}>
+                  <div className={styles.passwordPopoverTitle}>
+                    A senha deve possuir:
+                  </div>
+                  <ul className={styles.passwordRules}>
+                    {passwordRules.map((rule, idx) => (
+                      <li
+                        key={idx}
+                        style={{
+                          color: rule.test(senha) ? "green" : "red",
+                          listStyle: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5em",
+                          fontWeight: rule.test(senha) ? "bold" : "normal",
+                        }}
+                      >
+                        <span>{rule.test(senha) ? "✔️" : "❌"}</span>
+                        {rule.label}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-
-            <div className={styles.formExcluirConta}>
-              <SubmitButton
-                text="Editar Perfil"
-                type="submit"
-                id="btn_editar_perfil"
-                name="editar_perfil"
-                value="Editar"
-                className={styles.button}
-              />
-            </div>
-          </form>
-
-          <form className={styles.formExcluirConta} onSubmit={handleDelete}>
             <SubmitButton
-              text="Excluir conta"
+              text={loading ? "Salvando..." : "Salvar Alterações"}
               type="submit"
-              id="btn_excluir_conta"
-              name="excluir_conta"
-              value="Excluir Conta"
+              disabled={loading}
               className={styles.button}
             />
           </form>
-        </section>
+          <form
+            className={styles.form}
+            onSubmit={onDelete}
+            style={{ marginTop: "1.5rem" }}
+          >
+            <SubmitButton
+              text="Excluir conta"
+              type="submit"
+              className={styles.button}
+            />
+          </form>
+        </div>
       </main>
     </div>
   );

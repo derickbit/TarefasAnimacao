@@ -59,15 +59,18 @@ const SimularPartidas = () => {
               </tr>
             </thead>
             <tbody>
-              {historico.map((partida) => (
-                <tr key={partida.id}>
-                  <td>{partida.jogador1}</td>
-                  <td>{partida.jogador2}</td>
-                  <td>{partida.vencedor}</td>
-                  <td>{partida.pontuacao}</td>
-                  <td>{new Date(partida.created_at).toLocaleDateString()}</td>
-                </tr>
-              ))}
+              {historico
+                .slice()
+                .reverse()
+                .map((partida) => (
+                  <tr key={partida.id}>
+                    <td>{partida.jogador1}</td>
+                    <td>{partida.jogador2}</td>
+                    <td>{partida.vencedor}</td>
+                    <td>{partida.pontuacao}</td>
+                    <td>{new Date(partida.created_at).toLocaleDateString()}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         ) : (
