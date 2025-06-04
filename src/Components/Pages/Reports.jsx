@@ -31,7 +31,7 @@ const RefreshIcon = ({ onClick, style, title = "Atualizar" }) => (
 
 // Helper para obter a URL base do backend (como você ajustou)
 const getBackendBaseUrl = () => {
-  const apiUrl = import.meta.env.REACT_APP_API_URL || ""; // CORRIGIDO para import.meta.env
+  const apiUrl = import.meta.env.VITE_API_URL || ""; // CORRIGIDO para import.meta.env
   if (apiUrl && apiUrl.endsWith("/api")) {
     return apiUrl.slice(0, -"/api".length);
   }
