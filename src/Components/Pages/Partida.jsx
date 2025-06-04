@@ -16,7 +16,7 @@ const SimularPartidas = () => {
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const response = await axios.get("/api/usuarios");
+        const response = await axios.get("/api/jogadores");
         setUsuarios(response.data); // axios já retorna `data` diretamente
       } catch (error) {
         console.error("Erro ao buscar usuários:", error);
