@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import blackjack2 from "../../assets/blackjack2.jpg";
 import styles from "./Home.module.css";
 import { useState, useEffect } from "react";
+import Logo from "../Layout/Logo";
+import CardSuitsMorph from "../Cards/toMorph"; // Importa o componente de animação de naipes
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -74,7 +76,8 @@ function Home() {
                 </div>
               </div>
             ) : (
-              <img src={blackjack2} alt="Imagem do jogo Blackjack 2.0" />
+              // <Logo />
+              <CardSuitsMorph width="200" height="200" />
             )}
           </Link>
         </div>

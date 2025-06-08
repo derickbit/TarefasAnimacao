@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { useRef, useState } from "react";
 import SubmitButton from "../Form/SubmitButton";
+import Logo from "../Layout/Logo";
 
 function Login() {
   const { setToken, setUser } = useAuthContext();
@@ -47,7 +48,8 @@ function Login() {
     <div className={styles.loginContainer}>
       <main className={styles.main}>
         <div className={styles.container}>
-          <img src={logo} alt="Logo Blackjack" className={styles.logo} />
+          {/* <img src={logo} alt="Logo Blackjack" className={styles.logo} /> */}
+          <Logo className={styles.logo} />
           <h1 className={styles.title}>Login</h1>
           {mensagemErro && <p className={styles.prompt}>{mensagemErro}</p>}
           <form className={styles.form} method="post" onSubmit={onSubmit}>

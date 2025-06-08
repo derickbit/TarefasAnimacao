@@ -5,6 +5,7 @@ import logo from "../../assets/blackjack_logo.jpg";
 import axiosClient from "../../utils/axios_client";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "../Form/SubmitButton";
+import Logo from "../Layout/Logo";
 
 function Cadastro() {
   const [name, setName] = useState("");
@@ -112,7 +113,8 @@ function Cadastro() {
     <div className={styles.loginContainer}>
       <main className={styles.main}>
         <div className={styles.container}>
-          <img src={logo} alt="Logo Blackjack" className={styles.logo} />
+          {/* <img src={logo} alt="Logo Blackjack" className={styles.logo} /> */}
+          <Logo className={styles.logo} />
 
           <h1 className={styles.title}>Cadastro</h1>
           {mensagemErro && <p className={styles.prompt}>{mensagemErro}</p>}

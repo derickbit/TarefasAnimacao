@@ -80,15 +80,20 @@
   ); /* Ajusta o caminho para o novo tamanho */
 }
 
+.moprh {
+  width: 200px;
+  height: 200px;
+}
+
 .playgame img {
-  width: 300px;
+  width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
 }
 
 .loadingBox {
-  width: 300px;
+  width: 200px;
   height: 200px;
   background: #fff;
   border-radius: 8px;

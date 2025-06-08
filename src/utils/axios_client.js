@@ -2,6 +2,7 @@ import axios from "axios";
 
 const axiosClient = axios.create({
   baseURL: "https://blackjack2-tcc-6d5e11e9ec29.herokuapp.com/api",
+  // baseURL: "http://localhost:8000/api",
 });
 
 // Interceptor para adicionar o token de autorização e tratar a resposta

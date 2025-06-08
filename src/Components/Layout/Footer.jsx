@@ -13,7 +13,7 @@ function Footer() {
           <DiPhp />
         </li>
         <li>
-          <CardSuitsMorph />
+          <CardSuitsMorph width="30" height="30" />
         </li>
         <li>
           <DiJsBadge />
