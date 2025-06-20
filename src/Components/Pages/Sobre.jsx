@@ -1,130 +1,32 @@
+import LinkButton from "../Layout/LinkButton";
 import styles from "./Sobre.module.css";
 
 const Sobre = () => {
   return (
-    <div style={{ background: "#f5f5f5", minHeight: "100vh", padding: 0 }}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 32px 1fr",
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "64px 24px 32px 24px",
-          alignItems: "stretch",
-          gap: 0,
-        }}
-      >
+    <div className={styles.sobreSectionBg}>
+      <div className={styles.sobreSectionGrid}>
         {/* Coluna Esquerda */}
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: "1.2rem",
-            boxShadow: "0 2px 12px 0 rgba(0,0,0,0.06)",
-            padding: "2.5rem 2rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "3rem",
-              fontWeight: "bold",
-              marginBottom: "2rem",
-              color: "#222",
-              lineHeight: 1.1,
-            }}
-          >
-            Nossa História
-          </h1>
-          <p
-            style={{
-              fontSize: "1.15rem",
-              color: "#444",
-              marginBottom: "2.5rem",
-              lineHeight: 1.7,
-            }}
-          >
-            Há 18 anos, um sonho nasceu e começou a se materializar na mente e
-            no incansável esforço dos Irmãos Casagrande. Uma jornada que se
-            desdobrou nas salas de aula que pisaram e nas instituições que
-            lideraram, um compromisso apaixonado para promover o desenvolvimento
-            contínuo e incessante de educadores e instituições de ensino, tanto
-            públicas, quanto privadas. Entenda a trajetória dessa instituição
-            que se transformou em referência na formação continuada de
-            educadores.
+        <div className={styles.sobreSectionLeft}>
+          <h1 className={styles.sobreSectionTitle}>Nossa História</h1>
+          <p className={styles.sobreSectionText}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <a
-            href="#tutorial"
-            style={{
-              display: "inline-block",
-              background: "#222",
-              color: "#fff",
-              fontWeight: 600,
-              padding: "0.9rem 2.2rem",
-              borderRadius: "2rem",
-              textDecoration: "none",
-              fontSize: "1.1rem",
-              marginTop: "1.5rem",
-              transition: "background 0.2s",
-              boxShadow: "0 2px 8px 0 rgba(0,0,0,0.08)",
-            }}
-          >
-            Veja o Tutorial do Jogo
-          </a>
+          <LinkButton
+            to="#tutorial"
+            text="Veja o Tutorial do Jogo"
+            className="mainButton"
+          />
         </div>
         {/* Linha vertical central */}
-        <div
-          style={{
-            width: 4,
-            background: "#d1d5db",
-            borderRadius: 2,
-            margin: "24px 0",
-            alignSelf: "stretch",
-            position: "relative",
-          }}
-        >
-          {/* Pontos da timeline */}
-          <div
-            style={{
-              position: "absolute",
-              top: "120px",
-              left: "50%",
-              transform: "translate(-50%, 0)",
-              width: 24,
-              height: 24,
-              borderRadius: "50%",
-              border: "2px solid #888",
-              background: "#fff",
-            }}
-          ></div>
-          <div
-            style={{
-              position: "absolute",
-              top: "320px",
-              left: "50%",
-              transform: "translate(-50%, 0)",
-              width: 24,
-              height: 24,
-              borderRadius: "50%",
-              border: "2px solid #888",
-              background: "#fff",
-            }}
-          ></div>
-        </div>
+        <div className={styles.sobreSectionDivider}></div>
         {/* Coluna Direita: Timeline */}
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: "1.2rem",
-            boxShadow: "0 2px 12px 0 rgba(0,0,0,0.06)",
-            padding: "2.5rem 2rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            position: "relative",
-          }}
-        >
+        <div className={styles.sobreSectionRight}>
           {/* 2006 */}
           <div style={{ marginBottom: 80 }}>
             <div
@@ -152,19 +54,24 @@ const Sobre = () => {
                 marginBottom: 8,
               }}
             >
-              A Semente da Mudança
+              Origem do projeto
             </h2>
             <p
               style={{
                 color: "#444",
-                fontSize: "1.08rem",
+                fontSize: "1.18rem",
                 lineHeight: 1.7,
+                maxWidth: "100%",
               }}
             >
-              Tudo começou em 2006, quando a semente do Instituto Casagrande foi
-              plantada como a Alleanza Educacional. Nasceu em solo paranaense
-              com um objetivo claro: promover a formação de gestores escolares e
-              oferecer assessoria estratégica a instituições de ensino.
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+              eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
+              est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+              velit
             </p>
           </div>
           {/* 2012 */}
@@ -194,36 +101,29 @@ const Sobre = () => {
                 marginBottom: 8,
               }}
             >
-              Expandindo Horizontes
+              Futuro do projeto
             </h2>
             <p
               style={{
                 color: "#444",
-                fontSize: "1.08rem",
+                fontSize: "1.18rem",
                 lineHeight: 1.7,
+                maxWidth: "100%",
               }}
             >
-              Em 2012, a Alleanza Educacional cresceu e se transformou em
-              Alleanza Brasil. Com essa expansão, a organização ampliou seus
-              horizontes e começou a dedicar-se não apenas à formação de
-              gestores escolares, mas também à formação de professores,
-              consolidando sua posição como um farol de educação em todo o país.
+              ed quia non numquam eius modi tempora incidunt ut labore et dolore
+              magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+              nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+              aliquid ex ea commodi consequatur? Quis autem vel eum iure
+              reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+              consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+              pariatur?
             </p>
           </div>
         </div>
       </div>
       {/* Tutorial do Jogo */}
-      <div
-        id="tutorial"
-        style={{
-          maxWidth: 900,
-          margin: "48px auto 0 auto",
-          background: "#fff",
-          borderRadius: "1.2rem",
-          boxShadow: "0 4px 24px 0 rgba(0,0,0,0.08)",
-          padding: "2.5rem 2rem",
-        }}
-      >
+      <div className={styles.sobreTutorialBox} id="tutorial">
         <h2
           style={{
             fontSize: "2rem",
@@ -234,62 +134,24 @@ const Sobre = () => {
         >
           Como Jogar BlackJack
         </h2>
-        <ol
-          style={{
-            color: "#444",
-            paddingLeft: "1.2rem",
-            marginTop: "0.5rem",
-          }}
-        >
-          <li
-            style={{
-              marginBottom: "0.4rem",
-              fontSize: "1.05rem",
-            }}
-          >
+        <ol className={styles.sobreList}>
+          <li>
             O objetivo do BlackJack é somar 21 pontos ou chegar o mais próximo
             possível sem ultrapassar esse valor.
           </li>
-          <li
-            style={{
-              marginBottom: "0.4rem",
-              fontSize: "1.05rem",
-            }}
-          >
-            Cada jogador recebe duas cartas no início da rodada.
+          <li>Cada jogador recebe duas cartas no início da rodada.</li>
+          <li>
+            Você pode pedir mais cartas (&quot;Hit&quot;) ou parar
+            (&quot;Stand&quot;).
           </li>
-          <li
-            style={{
-              marginBottom: "0.4rem",
-              fontSize: "1.05rem",
-            }}
-          >
-            Você pode pedir mais cartas ("Hit") ou parar ("Stand").
+          <li>
+            Se a soma das suas cartas passar de 21, você perde
+            (&quot;Bust&quot;).
           </li>
-          <li
-            style={{
-              marginBottom: "0.4rem",
-              fontSize: "1.05rem",
-            }}
-          >
-            Se a soma das suas cartas passar de 21, você perde ("Bust").
-          </li>
-          <li
-            style={{
-              marginBottom: "0.4rem",
-              fontSize: "1.05rem",
-            }}
-          >
+          <li>
             O dealer (computador) joga após você, seguindo regras próprias.
           </li>
-          <li
-            style={{
-              marginBottom: "0.4rem",
-              fontSize: "1.05rem",
-            }}
-          >
-            Ganha quem tiver a maior pontuação sem ultrapassar 21.
-          </li>
+          <li>Ganha quem tiver a maior pontuação sem ultrapassar 21.</li>
         </ol>
       </div>
     </div>
