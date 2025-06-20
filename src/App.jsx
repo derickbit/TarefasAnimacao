@@ -25,6 +25,7 @@ import AguardeVerificacao from "./Components/Pages/AguardeVerificacao";
 import EmailVerificado from "./Components/Pages/EmailVerificado";
 import EsqueciSenha from "./Components/Pages/EsqueciSenha";
 import RedefinirSenha from "./Components/Pages/RedefinirSenha";
+import Sobre from "./Components/Pages/Sobre";
 
 function AppContent() {
   const location = useLocation();
@@ -88,6 +89,7 @@ function AppContent() {
           <Route path="/email-verificado" element={<EmailVerificado />} />
           <Route path="/esqueci-senha" element={<EsqueciSenha />} />
           <Route path="/redefinir-senha/:token" element={<RedefinirSenha />} />
+          <Route path="/sobre" element={<Sobre />} />
           <Route
             path="/perfil"
             element={

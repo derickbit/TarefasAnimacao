@@ -82,17 +82,8 @@ input:focus {
 }
 
 /* Botões */
-.submitButton,
-.submitButtonExcluir {
-  padding: 0.9em;
-  font-size: 1em;
-  font-weight: bold;
-  color: #fff;
-  background-color: #444;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+.submitButton {
+  composes: mainButton from "../../styles/Button.css";
 }
 
 .submitButton:hover {
@@ -101,11 +92,7 @@ input:focus {
 }
 
 .submitButtonExcluir {
-  background-color: #d32f2f;
-}
-
-.submitButtonExcluir:hover {
-  background-color: #b71c1c;
+  composes: mainButton danger from "../../styles/Button.css";
 }
 
 /* Rodapé */

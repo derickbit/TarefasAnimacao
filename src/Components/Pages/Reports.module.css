@@ -91,21 +91,12 @@ select:focus {
 }
 
 .submitButton {
-  padding: 0.9em;
-  font-size: 1em;
-  font-weight: bold;
-  color: #fff;
-  background-color: #444;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  composes: mainButton from "../../styles/Button.css";
   width: 100%;
 }
 
 .submitButton:hover {
-  background-color: #222;
-  transform: scale(1.03);
+  /* Não faz nada, já está no mainButton */
 }
 
 .denuncias_section {

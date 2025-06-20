@@ -419,7 +419,6 @@ const Reports = () => {
                           <SubmitButton
                             text="Abrir Chat"
                             onClick={() => openChat(report)}
-                            className={styles.smallBtn}
                           />
                         )}
                       </td>

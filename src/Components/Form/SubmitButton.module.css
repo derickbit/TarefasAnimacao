@@ -6,6 +6,8 @@
   transition: 0.5s;
   cursor: pointer;
   border: 1px solid #222;
+  min-width: 100px; /* Garante espaço suficiente para o texto em bold */
+  box-sizing: border-box;
 }
 
 .btn:hover {

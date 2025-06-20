@@ -5,15 +5,14 @@ import logo from "../../assets/blackjack_logo.jpg";
 import "animate.css";
 import Logo from "./Logo";
 import Hamburger from "../Cards/Hamburger";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { DiGithubBadge } from "react-icons/di";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function Navbar() {
   const { setToken, setUser } = useAuthContext();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isHamburgerActive, setIsHamburgerActive] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuContainerRef = useRef(null);
 
   const handleLogout = () => {
     setToken(null);
@@ -23,98 +22,65 @@ function Navbar() {
     alert("Você foi deslogado!");
   };
 
-  const handleSociaisClick = () => {
-    setIsDropdownOpen((prev) => !prev);
-    setIsHamburgerActive((prev) => !prev);
+  const handleHamburgerClick = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+    setIsDropdownOpen(false);
+  };
+
+  const handleMobileLinkClick = () => {
+    setIsMobileMenuOpen(false);
+    setIsDropdownOpen(false);
   };
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.navLeft}>
-        <Link to="/" className={styles.link}>
+      <div className={styles.navLeft} ref={menuContainerRef}>
+        <div className={styles.logoContainer}>
           <Logo src={logo} alt="Logo" className={styles.logo} />
-        </Link>
-        <ul className={styles.list}>
-          <li className={styles.item}>
+        </div>
+        {/* Hamburger para mobile à direita do logo */}
+        <div className={styles.hamburgerMobile} onClick={handleHamburgerClick}>
+          <Hamburger border={false} active={isMobileMenuOpen} />
+        </div>
+        {/* Menu principal */}
+        <ul
+          className={`${styles.list} ${isMobileMenuOpen ? styles.open : ""}`}
+          style={{
+            ...(isMobileMenuOpen
+              ? {
+                  width: "auto",
+                  minWidth: "unset",
+                  maxWidth: "none",
+                  left: 0,
+                  right: "auto",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                  background: "#222",
+                  padding: "0.3em 0.7em",
+                  borderRadius: "0 0 8px 8px",
+                  marginTop: "0.5em",
+                }
+              : {}),
+          }}
+        >
+          <li className={styles.item} onClick={handleMobileLinkClick}>
             <Link to="/">Home</Link>
           </li>
-          <li className={styles.item}>
+          <li className={styles.item} onClick={handleMobileLinkClick}>
             <Link to="/perfil">Editar Perfil</Link>
           </li>
-
-          <li className={styles.item}>
+          <li className={styles.item} onClick={handleMobileLinkClick}>
             <Link to="/ranking">Ranking</Link>
           </li>
-          <li className={styles.item}>
+          <li className={styles.item} onClick={handleMobileLinkClick}>
             <Link to="/partida">Partida</Link>
           </li>
-          <li className={styles.item}>
+          <li className={styles.item} onClick={handleMobileLinkClick}>
             <Link to="/reports">Contato</Link>
           </li>
-          <li
-            className={styles.item}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5em",
-              position: "relative",
-            }}
-          >
-            <div
-              onClick={handleSociaisClick}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-                color: "#fff",
-                fontWeight: "bold",
-                userSelect: "none",
-              }}
-              className={styles.link}
-            >
-              <span style={{ marginRight: "0.5em" }}>Sociais:</span>
-              <Hamburger border={false} active={isHamburgerActive} />
-            </div>
-            {isDropdownOpen && (
-              <ul
-                className={styles.dropdown}
-                style={{
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  minWidth: "120px",
-                }}
-              >
-                <li>
-                  <Link
-                    to="https://www.linkedin.com/in/derick-bitencourte-da-silva/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "inherit",
-                    }}
-                  >
-                    <DiGithubBadge /> <p>GitHub</p>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="https://github.com/derickbit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "inherit",
-                    }}
-                  >
-                    <FaLinkedin /> <p>Linkedin</p>
-                  </Link>
-                </li>
-              </ul>
-            )}
+          <li className={styles.item} onClick={handleMobileLinkClick}>
+            <Link to="/sobre">Sobre</Link>
           </li>
+          {/* Sociais removido */}
         </ul>
       </div>
       <button className={styles.logout} onClick={handleLogout}>

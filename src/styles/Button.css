@@ -1,0 +1,41 @@
+/* Botão padrão para todo o projeto */
+.mainButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #232526 0%, #414345 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.08em;
+  padding: 0.7em 1.6em;
+  border: none;
+  border-radius: 2em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s, color 0.2s, box-shadow 0.3s;
+  outline: none;
+  min-width: 120px;
+  min-height: 44px;
+}
+
+.mainButton:hover,
+.mainButton:focus {
+  background: linear-gradient(90deg, #434343 0%, #232526 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.mainButton:active {
+  background: #232526;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Para botões de ação perigosa */
+.mainButton.danger {
+  background: linear-gradient(90deg, #d32f2f 0%, #b71c1c 100%);
+}
+.mainButton.danger:hover,
+.mainButton.danger:focus {
+  background: linear-gradient(90deg, #b71c1c 0%, #d32f2f 100%);
+}

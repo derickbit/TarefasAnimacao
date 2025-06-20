@@ -1,5 +1,5 @@
 import styles from "./forms.module.css";
-import logo from "../../assets/blackjack_logo.jpg";
+// import logo from "../../assets/blackjack_logo.jpg";
 import { Link } from "react-router-dom";
 import axiosClient from "../../utils/axios_client";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 import { useRef, useState } from "react";
 import SubmitButton from "../Form/SubmitButton";
 import Logo from "../Layout/Logo";
+import eyeSprite from "../../assets/eye-sprite.png";
 
 function Login() {
   const { setToken, setUser } = useAuthContext();
@@ -14,6 +15,7 @@ function Login() {
   const passwordRef = useRef();
   const navigate = useNavigate();
   const [mensagemErro, setMensagemErro] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -70,14 +72,33 @@ function Login() {
               <label htmlFor="senha" className={styles.label}>
                 Senha:
               </label>
-              <input
-                type="password"
-                name="senha"
-                id="senha"
-                ref={passwordRef}
-                required
-                className={styles.input}
-              />
+              <div className={styles.passwordWrapper}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="senha"
+                  id="senha"
+                  ref={passwordRef}
+                  required
+                  className={styles.input}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className={styles.passwordToggleBtn}
+                  tabIndex={-1}
+                  aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                >
+                  <span className={styles.eyeSpriteWrapper}>
+                    <img
+                      src={eyeSprite}
+                      alt={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                      className={
+                        showPassword ? styles.eyeImgClosed : styles.eyeImgOpen
+                      }
+                    />
+                  </span>
+                </button>
+              </div>
             </div>
             <SubmitButton
               text="Entrar"

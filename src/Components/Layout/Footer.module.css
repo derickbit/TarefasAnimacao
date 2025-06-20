@@ -7,14 +7,8 @@
   position: fixed; /* Fixa o rodapé no final da página */
   bottom: 0; /* Garante que ele fique na parte inferior */
   left: 0;
-}
-
-body {
-  margin: 0; /* Remove margens para alinhar o rodapé */
-  padding: 0; /* Remove o padding para evitar espaços desnecessários */
-  min-height: 100vh; /* Garante que o corpo ocupe a tela toda */
-  display: flex;
-  flex-direction: column;
+  min-height: 64px; /* Garante altura mínima, mas permite crescer */
+  z-index: 1001; /* Garante que o rodapé fique acima de outros conteúdos */
 }
 
 .body-wrapper {
@@ -49,7 +43,9 @@ body {
 
 .copy_right {
   font-size: 0.8em;
-  margin-top: 1em;
+  margin-top: 0.2em;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .copy_right span {
