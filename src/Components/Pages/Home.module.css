@@ -142,3 +142,38 @@
   height: 618px;
   /* Outras regras que você quiser */
 }
+
+.home_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinha o conteúdo no topo */
+  padding: 2em;
+}
+
+.home_container h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.2em;
+}
+
+.home_container h2 {
+  margin-bottom: 1.5em;
+}
+
+/* NOVO: Estilo para a área que vai conter a cena 3D */
+.scene_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 60vh;
+  max-width: 1200px;
+  height: 65vh; /* Define uma altura relativa à tela (ex: 65% da altura da viewport) */
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-top: 2em;
+  position: relative; /* Essencial para o posicionamento do canvas */
+  overflow: hidden; /* Garante que nada vaze */
+}
